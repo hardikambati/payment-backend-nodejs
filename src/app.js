@@ -12,12 +12,14 @@ app.use('/public', express.static('public'));
 
 // import routes
 const user        = require('./routes/userRoute');
-const transaction = require('./routes/transactionRoute')
+const transaction = require('./routes/transactionRoute');
+const external    = require('./routes/externalRoute');
 
 
 // url routing
 app.use('/api/v1', user);
-app.use('/api/v1/transactions', transaction)
+app.use('/api/v1/transactions', transaction);
+app.use('/api/v1/external', external);
 
 
 app.get('/', (req, res) => {

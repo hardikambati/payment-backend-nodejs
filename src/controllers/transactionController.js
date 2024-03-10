@@ -39,10 +39,6 @@ exports.getTransactions = catchAsync(async (req, res, next) => {
         return user ? user.socketId : null;
     };
 
-    // send message to connected socket
-    const socket_id = getSocketIdByUserId(user_id.toString());
-    io.to(socket_id).emit('transactionStatus', 'success');
-    
     Transaction.find({ user_id: user_id })
         .then((results) => {
             res.status(200).json({

@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.9.7-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - payment
+  
+  node_app:
+    build: .
+    container_name: payment-backend
+    restart: on-failure:3
+    ports: 
+      - 8000:8000
+    volumes:
+      - .:/app
+    command: >
+      sh -c "nodemon src/server.js"
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+    networks:
+      - payment
+
+networks:
+  payment:
+    driver: bridge

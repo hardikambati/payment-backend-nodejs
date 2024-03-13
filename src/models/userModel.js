@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const jwt      = require('jsonwebtoken');
 const bcrypt   = require('bcrypt');
+const Wallet   = require('./walletModel');
 
 
 const userSchema = new mongoose.Schema({
@@ -34,6 +35,12 @@ userSchema.pre('save', async function(next) {
     }
     next();
 });
+
+userSchema.post('save', async function() {
+    await Wallet.create({
+        user_id: this._id
+    })
+})
 
 userSchema.methods.generateToken = function() {
     return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {

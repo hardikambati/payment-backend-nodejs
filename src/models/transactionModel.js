@@ -14,9 +14,14 @@ const transactionSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    amount: {
+        type: Number,
+        default: 0,
+        required: true,
+    },
     status: {
         type: String,
-        enum: ['scheduled', 'started', 'verifying', 'transacting', 'completed', 'closed'],
+        enum: ['scheduled', 'success', 'failure'],
         default: 'scheduled',
         required: true
     },

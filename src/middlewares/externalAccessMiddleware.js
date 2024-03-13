@@ -2,7 +2,7 @@ const catchAsync = require('./catchAsync');
 
 
 exports.externalAccessMiddleware = catchAsync(async (req, res, next) => {
-    const msAccessKey = req.headers['MS_ACCESS_KEY'];
+    const msAccessKey = req.headers['ms_access_key'];
     
     if (!msAccessKey) {
         return res.status(401).json({ error: 'Access key not found' });

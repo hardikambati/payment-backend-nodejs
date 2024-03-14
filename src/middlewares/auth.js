@@ -4,6 +4,7 @@ const catchAsync = require('./catchAsync');
 
 
 exports.isAuthenticated = catchAsync(async (req, res, next) => {
+
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 

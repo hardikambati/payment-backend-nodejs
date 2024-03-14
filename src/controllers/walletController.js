@@ -16,7 +16,7 @@ exports.rechargeWallet = catchAsync(async (req, res, next) => {
 
     const wallet = await Wallet.findOne({ user_id: req.user._id });
 
-    wallet.balance += amount;
+    wallet.balance += Number(amount);
     await wallet.save();
 
     res.status(201).json({

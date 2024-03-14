@@ -4,6 +4,7 @@
 ## Description
 
 This backend system replicates a system like google pay, on a lower level.
+<br/>
 By using this system, client will be able to :
 - create transactions with details
 - recharge their wallets
